@@ -1,0 +1,21 @@
+#Deployment Plugin Project File
+#Mon Mar 27 12:20:37 MDT 2017
+build.ant.name=<.>\\resources\\dp\\hello_build.xml
+build.dp.file=<.>\\resources\\dp\\hello.dp
+build.location=
+
+bundles.0.bundle_path=<.>\\plugins\\hello_osgi_1.0.0.201703271253.jar
+bundles.0.customizer=false
+bundles.0.headers.count=0
+bundles.0.missing=false
+bundles.0.name=bundles/hello_osgi_1.0.0.201703271253.jar
+bundles.0.symbolic_name=hello_osgi
+bundles.0.version=1.0.0.201703271253
+
+bundles.count=1
+certificates.count=0
+general.signbundles=false
+headers.other.headers=
+headers.symbolic.name=hello
+headers.version=1.0.0
+resources.count=0
