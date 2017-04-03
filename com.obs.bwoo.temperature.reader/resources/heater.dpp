@@ -1,0 +1,20 @@
+#Deployment Plugin Project File
+#Mon Mar 27 14:52:46 MDT 2017
+build.ant.name=<.>\\resources\\heater_build.xml
+build.dp.file=<.>\\resources\\heater.dp
+build.location=
+bundles.0.bundle_path=<.>\\plugins\\org.eclipse.kura.demo.heater_1.0.2.jar
+bundles.0.customizer=false
+bundles.0.headers.count=0
+bundles.0.missing=false
+bundles.0.name=bundles/org.eclipse.kura.demo.heater_1.0.2.jar
+bundles.0.symbolic_name=com.obs.bwoo.temperature.reader;singleton\:\=true
+bundles.0.version=1.0.2
+bundles.count=1
+certificates.count=0
+general.signbundles=false
+headers.other.headers=
+headers.symbolic.name=heater
+headers.version=1.0.0
+resources.count=0
+

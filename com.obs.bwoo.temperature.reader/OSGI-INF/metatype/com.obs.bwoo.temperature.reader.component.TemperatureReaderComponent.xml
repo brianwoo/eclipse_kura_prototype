@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2011, 2016 Eurotech and/or its affiliates
+
+     All rights reserved. This program and the accompanying materials
+     are made available under the terms of the Eclipse Public License v1.0
+     which accompanies this distribution, and is available at
+     http://www.eclipse.org/legal/epl-v10.html
+
+    Contributors:
+      Eurotech
+
+-->
+<MetaData xmlns="http://www.osgi.org/xmlns/metatype/v1.2.0" localization="en_us">
+    <OCD id="com.obs.bwoo.temperature.reader.component.TemperatureReaderComponent"
+         name="TemperatureReaderComponent" 
+         description="This is a simulator for a temperature reading gateway application. Its configuration options will be passed down the smart heater. ">
+        
+        <Icon resource="OSGI-INF/heater.png" size="32"/>
+
+        <AD id="publish.rate"  
+            name="publish.rate"
+            type="Integer"
+            cardinality="0" 
+            required="true"
+            default="10"
+            min="1" 
+            description="Default message publishing rate in seconds (min 1)."/>
+
+        <AD id="publish.semanticTopic"  
+            name="publish.semanticTopic"
+            type="String"
+            cardinality="0" 
+            required="true"
+            default="test" 
+            description="Default semantic topic to publish the messages to."/>
+            
+        <AD id="publish.server.name"  
+            name="publish.server.name"
+            type="String"
+            cardinality="0" 
+            required="true"
+            default="RpiServer" 
+            description="Default Kafka to publish the messages to."/>
+            
+        <AD id="publish.server.port"  
+            name="publish.server.port"
+            type="String"
+            cardinality="0" 
+            required="true"
+            default="9092" 
+            description="Default Kafka server port"/>                        
+        
+    </OCD>
+    
+    <Designate pid="com.obs.bwoo.temperature.reader.component.TemperatureReaderComponent">
+        <Object ocdref="com.obs.bwoo.temperature.reader.component.TemperatureReaderComponent"/>
+    </Designate>
+</MetaData>
