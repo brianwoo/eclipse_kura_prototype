@@ -8,6 +8,7 @@ Bundle-ClassPath: log4j-1.2.17.jar,
  slf4j-api-1.7.21.jar,
  slf4j-log4j12-1.7.21.jar,
  jsse.jar
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: com.sun.net.ssl,
  com.sun.net.ssl.internal.pkcs12,
  com.sun.net.ssl.internal.ssl,
@@ -46,4 +47,3 @@ Export-Package: com.sun.net.ssl,
  org.slf4j.impl,
  org.slf4j.spi,
  sun.net.www.protocol.https
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
