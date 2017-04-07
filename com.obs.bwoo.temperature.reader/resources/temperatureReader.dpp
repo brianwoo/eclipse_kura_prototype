@@ -1,0 +1,20 @@
+#Deployment Plugin Project File
+#Fri Apr 07 11:42:06 MDT 2017
+build.ant.name=<.>\\resources\\obsBwooTemperatureReader_build.xml
+build.dp.file=<.>\\resources\\obsBwooTemperatureReader.dp
+build.location=
+bundles.0.bundle_path=<.>\\plugins\\com.obs.bwoo.temperature.reader.component_1.0.2.jar
+bundles.0.customizer=false
+bundles.0.headers.count=0
+bundles.0.missing=false
+bundles.0.name=bundles/com.obs.bwoo.temperature.reader.component_1.0.2.jar
+bundles.0.symbolic_name=com.obs.bwoo.temperature.reader.component;singleton\:\=true
+bundles.0.version=1.0.2
+bundles.count=1
+certificates.count=0
+general.signbundles=false
+headers.other.headers=
+headers.symbolic.name=obsBwooTemperatureReader
+headers.version=1.0.2
+resources.count=0
+

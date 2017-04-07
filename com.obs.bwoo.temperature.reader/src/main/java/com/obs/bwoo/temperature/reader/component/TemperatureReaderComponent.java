@@ -189,6 +189,8 @@ public class TemperatureReaderComponent implements ConfigurableComponent
 			System.out.println("created SimpleProducer");
 
 			String currentTemp = "Current Temperature: " + temperature;
+			
+			//String currentTemp = "{ 'currentTemp': " + temperature + " }";
 
 			SimpleProducer.send(url, 3, topic, currentTemp);
 
