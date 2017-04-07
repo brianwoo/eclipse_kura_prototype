@@ -42,6 +42,20 @@ public class KuraChannelFactory {
 					  clientId + "/" +
 					  "DEPLOY-V2/EXEC/download";
 		}		
+		else if (Type.SERVICE_START == type)
+		{
+			channel = "$EDC/" + 
+					  accountId + "/" +
+					  clientId + "/" +
+					  "DEPLOY-V2/EXEC/start/124";
+		}
+		else if (Type.SERVICE_STOP == type)
+		{
+			channel = "$EDC/" + 
+					  accountId + "/" +
+					  clientId + "/" +
+					  "DEPLOY-V2/EXEC/stop/124";
+		}		
 		
 		return channel;
 	}

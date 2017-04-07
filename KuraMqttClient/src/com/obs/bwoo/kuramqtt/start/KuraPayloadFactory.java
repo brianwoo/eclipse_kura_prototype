@@ -31,21 +31,29 @@ public class KuraPayloadFactory {
 		if (Type.DOWNLOAD_1 == type)
 		{
 			payload.addMetric("job.id", new Long(12345));
-			payload.addMetric("dp.uri", "http://s3-us-west-2.amazonaws.com/dzmtzxbieb/terminator.dp");
-			payload.addMetric("dp.name", "terminator");
-			payload.addMetric("dp.version", "1.0.0");
+			payload.addMetric("dp.uri", "https://github.com/brianwoo/eclipse_kura_prototype/raw/master/com.obs.bwoo.temperature.reader/resources/obsBwooTemperatureReader_reg_strings.dp");
+			payload.addMetric("dp.name", "obsBwooTemperatureReader");
+			payload.addMetric("dp.version", "1.0.2");
 			payload.addMetric("dp.download.protocol", "HTTP");
 			payload.addMetric("dp.install.system.update", new Boolean(false));
 		}
 		else if (Type.DOWNLOAD_2 == type)
 		{
 			payload.addMetric("job.id", new Long(12345));
-			payload.addMetric("dp.uri", "http://s3-us-west-2.amazonaws.com/dzmtzxbieb/terminator.dp");
-			payload.addMetric("dp.name", "terminator");
-			payload.addMetric("dp.version", "1.0.0");
+			payload.addMetric("dp.uri", "https://github.com/brianwoo/eclipse_kura_prototype/raw/master/com.obs.bwoo.temperature.reader/resources/obsBwooTemperatureReader_json.dp");
+			payload.addMetric("dp.name", "obsBwooTemperatureReader");
+			payload.addMetric("dp.version", "1.0.3");
 			payload.addMetric("dp.download.protocol", "HTTP");
 			payload.addMetric("dp.install.system.update", new Boolean(false));
 		}		
+		else if (Type.SERVICE_START == type)
+		{
+			// no extra metric needed in payload
+		}
+		else if (Type.SERVICE_STOP == type)
+		{
+			// no extra metric needed in payload
+		}
 		
 		return payload;
 	}

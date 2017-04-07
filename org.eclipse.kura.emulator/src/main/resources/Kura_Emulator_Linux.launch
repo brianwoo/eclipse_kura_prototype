@@ -25,5 +25,5 @@
 <booleanAttribute key="tracing" value="false"/>
 <booleanAttribute key="useCustomFeatures" value="false"/>
 <booleanAttribute key="useDefaultConfigArea" value="true"/>
-<stringAttribute key="workspace_bundles" value="org.eclipse.kura.api@default:true,org.eclipse.kura.demo.heater@default:default,org.eclipse.kura.emulator@default:true"/>
+<stringAttribute key="workspace_bundles" value="bwoo_kura_configurable@default:default,hello_osgi@default:default,org.eclipse.kura.demo.heater@default:default,org.eclipse.kura.emulator@default:true,org.eclipse.kura.example.publisher@default:default"/>
 </launchConfiguration>

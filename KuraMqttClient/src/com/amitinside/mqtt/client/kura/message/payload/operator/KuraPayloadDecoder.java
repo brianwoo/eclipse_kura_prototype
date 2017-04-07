@@ -70,7 +70,7 @@ public class KuraPayloadDecoder {
 						protoMsg.getMetric(i).getType());
 				kuraMsg.addMetric(name, value);
 				
-				System.out.println("Received Metric: " + name + " = " + value);
+				//System.out.println("Received Metric: " + name + " = " + value);
 				
 			} catch (final Exception ihte) {
 				System.err.println("During deserialization, ignoring metric named: " + name

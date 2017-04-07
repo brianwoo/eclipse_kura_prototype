@@ -3,8 +3,17 @@
  */
 package com.obs.bwoo.kuramqtt.start;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import com.amitinside.mqtt.client.adapter.MessageListener;
 import com.amitinside.mqtt.client.kura.message.KuraPayload;
 import com.obs.bwoo.kuramqtt.client.KuraMqttClient;
+import com.obs.bwoo.kuramqtt.client.commands.Executable;
+import com.obs.bwoo.kuramqtt.client.configs.PubSubConfigs;
+import com.obs.bwoo.kuramqtt.client.exceptions.NoPropertiesFoundException;
 
 /**
  * @author bwoo
@@ -12,9 +21,44 @@ import com.obs.bwoo.kuramqtt.client.KuraMqttClient;
  */
 public class Main {
 
-	private static final String DEFAULT_REQUESTER_CLIENT_ID = "obsUser";
-	private static final String DEFAULT_REQUEST_ID = "12345";
-	private static final int MIN_NUM_ARGS = 5;
+	private static final int MIN_NUM_ARGS = 1;
+	
+	
+	public static Properties getProperties(String fileLocation)
+	{
+		InputStream input = null;
+		
+		try
+		{
+			String propFile = fileLocation;
+			input = new FileInputStream(propFile);
+		
+			Properties prop = new Properties();
+			prop.load(input);
+			
+			return prop;
+		}
+		catch (IOException e)
+		{
+			e.printStackTrace();
+			throw new NoPropertiesFoundException("Unable to open file: " + fileLocation, e);
+		}
+		finally
+		{
+			if (input != null)
+			{
+				try 
+				{
+					input.close();
+				}
+				catch(IOException e)
+				{
+					e.printStackTrace();
+					throw new NoPropertiesFoundException("Unable to close file: " + fileLocation, e);
+				}
+			}
+		}
+	}
 	
 	
 	/**
@@ -24,29 +68,23 @@ public class Main {
 
 		if (args.length < MIN_NUM_ARGS)
 		{
-			System.err.println("Usage: Main mqttServerAddr mqttServerPort accountId targetClientId command "
-					+ "requesterClientId requestId");
-			
-			System.err.println("requesterClientId & requestId - auto generated if not entered");
-			
+			System.err.println("Usage: Main propertiesFile");
 			return;
 		}
 		
-		String mqttServerAddr = args[0];
-		String mqttServerPort = args[1];
-		String accountId = args[2];
-		String targetClientId = args[3];
-		String command = args[4];
+		Properties prop = getProperties(args[0]);
 		
-		String requesterClientId = DEFAULT_REQUESTER_CLIENT_ID;
-		String requestId = DEFAULT_REQUEST_ID;
+		String mqttServerAddr = prop.getProperty("mqttServerAddr");
+		String mqttServerPort = prop.getProperty("mqttServerPort");
+		String accountId = prop.getProperty("accountId");
+		String targetClientId = prop.getProperty("targetClientId");
+		String command = prop.getProperty("command");
 		
-		if (args.length > MIN_NUM_ARGS && args[5] != null) requesterClientId = args[5];
-		if (args.length > MIN_NUM_ARGS && args[6] != null) requestId = args[6];
-			
+		String requesterClientId = prop.getProperty("requesterClientId");
+		String requestId = prop.getProperty("requestId");
+				
 		
-		
-		KuraMqttClient client = new KuraMqttClient(mqttServerAddr, 
+		final KuraMqttClient client = new KuraMqttClient(mqttServerAddr, 
 												   mqttServerPort, 
 												   requesterClientId, 
 												   "", 
@@ -63,25 +101,20 @@ public class Main {
 			System.out.println("Connected");
 			
 			// now get all the information ready to publish.
-			KuraCommand kCommand = new KuraCommand(command);
-			String channel = kCommand.getChannel(accountId, targetClientId);
-			KuraPayload payload = kCommand.getPayload(requestId, requesterClientId);
+			Executable executable = KuraCommand.getExecutable(
+					client, 
+					command, 
+					accountId, 
+					requestId, 
+					requesterClientId, 
+					targetClientId,
+					prop);
 			
-			/*
-			KuraPayload payload = new KuraPayload();
-			payload.addMetric("request.id", "1363603920892-8078887174204257595");
-			payload.addMetric("requester.client.id", "requesterClientId");
-			payload.addMetric("job.id", new Long(12345));
-			payload.addMetric("dp.uri", "http://s3-us-west-2.amazonaws.com/dzmtzxbieb/terminator.dp");
-			payload.addMetric("dp.name", "terminator");
-			payload.addMetric("dp.version", "1.0.0");
-			payload.addMetric("dp.download.protocol", "HTTP");
-			payload.addMetric("dp.install.system.update", new Boolean(false));
 			
-			String channel = "$EDC/brian/08:00:27:52:DC:FC/DEPLOY-V2/EXEC/download";
-			*/
-			
-			client.publish(channel, payload);
+			executable.execute();
+						
+			System.out.println("Press anykey to exit...");
+			System.in.read();
 			
 		}
 		catch (Exception e)

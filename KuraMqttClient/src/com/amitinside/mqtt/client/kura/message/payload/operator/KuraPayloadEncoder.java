@@ -115,7 +115,7 @@ public class KuraPayloadEncoder {
 		
 			Object value = this.m_kuraPayload.getMetric(name);
 			
-			System.out.println("Metric: " + name + " = " + value);
+			System.out.println("Publish Metric: " + name + " = " + value);
 			
 			// BRIAN: hack to get past the job.id not being a long
 			if (name.equals("job.id"))
