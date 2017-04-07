@@ -28,9 +28,9 @@ public class ServiceStopConfigs extends PubSubConfigs
 		channels.add(
 				"$EDC/" + 
 				accountId + "/" + 
-				requestId +
+				requesterClientId +
 				"/DEPLOY-V2/REPLY/" + 
-				requesterClientId);
+				requestId);
 		
 		return channels;
 	}
