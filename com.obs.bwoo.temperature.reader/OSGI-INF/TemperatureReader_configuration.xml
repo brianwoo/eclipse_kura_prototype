@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<ns2:configuration 
+	xmlns:ns2="http://eurotech.com/esf/2.0"
+  	xmlns="http://www.osgi.org/xmlns/metatype/v1.2.0"
+  	pid="com.obs.bwoo.temperature.reader.component.TemperatureReaderComponent">
+  
+  
+    <OCD id="com.obs.bwoo.temperature.reader.component.TemperatureReaderComponent"
+         name="TemperatureReaderComponent" 
+         description="This is a simulator for a temperature reading gateway application. Its configuration options will be passed down the smart heater. ">
+        
+        <Icon resource="OSGI-INF/heater.png" size="32"/>
+
+        <AD id="publish.rate"  
+            name="publish.rate"
+            type="Integer"
+            cardinality="0" 
+            required="true"
+            default="10"
+            min="1" 
+            description="Default message publishing rate in seconds (min 1)."/>
+
+        <AD id="publish.semanticTopic"  
+            name="publish.semanticTopic"
+            type="String"
+            cardinality="0" 
+            required="true"
+            default="test" 
+            description="Default semantic topic to publish the messages to."/>
+            
+        <AD id="publish.server.name"  
+            name="publish.server.name"
+            type="String"
+            cardinality="0" 
+            required="true"
+            default="RpiServer" 
+            description="Default Kafka to publish the messages to."/>
+            
+        <AD id="publish.server.port"  
+            name="publish.server.port"
+            type="String"
+            cardinality="0" 
+            required="true"
+            default="9092" 
+            description="Default Kafka server port"/>                        
+    </OCD>
+    
+    <ns2:properties>
+    	<ns2:property type="Integer" array="false" name="publish.rate">
+      		<ns2:value>10</ns2:value>
+    	</ns2:property>
+    	
+    	<ns2:property type="String" array="false" name="publish.semanticTopic">
+      		<ns2:value>test</ns2:value>
+    	</ns2:property>
+    	
+    	<ns2:property type="String" array="false" name="publish.server.name">
+      		<ns2:value>RpiServer</ns2:value>
+    	</ns2:property>
+    	
+    	<ns2:property type="String" array="false" name="publish.server.port">
+      		<ns2:value>9092</ns2:value>
+    	</ns2:property>
+    	    	
+  	</ns2:properties>
+    
+    <Designate pid="com.obs.bwoo.temperature.reader.component.TemperatureReaderComponent">
+        <Object ocdref="com.obs.bwoo.temperature.reader.component.TemperatureReaderComponent"/>
+    </Designate>
+</ns2:configuration>
