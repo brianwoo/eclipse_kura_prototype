@@ -9,9 +9,11 @@ import com.amitinside.mqtt.client.kura.message.KuraPayload;
 import com.obs.bwoo.kuramqtt.client.KuraMqttClient;
 import com.obs.bwoo.kuramqtt.client.commands.Download;
 import com.obs.bwoo.kuramqtt.client.commands.Executable;
+import com.obs.bwoo.kuramqtt.client.commands.NullCommand;
 import com.obs.bwoo.kuramqtt.client.commands.Service;
 import com.obs.bwoo.kuramqtt.client.configs.Download1Configs;
 import com.obs.bwoo.kuramqtt.client.configs.Download2Configs;
+import com.obs.bwoo.kuramqtt.client.configs.NullConfigs;
 import com.obs.bwoo.kuramqtt.client.configs.PubSubConfigs;
 import com.obs.bwoo.kuramqtt.client.configs.ServiceStopConfigs;
 import com.obs.bwoo.kuramqtt.client.configs.ServiceStartConfigs;
@@ -79,8 +81,13 @@ public class KuraCommand {
 			
 			return new Service(client, configs, additionalArgs);
 		}
+		else
+		{
+			PubSubConfigs configs = new NullConfigs(accountId, requestId, requesterClientId, targetClientId);
+			return new NullCommand(client, configs);
+		}
 			
-		return null;
+		
 	}
 	
 	
