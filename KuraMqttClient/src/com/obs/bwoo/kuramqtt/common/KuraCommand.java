@@ -16,9 +16,6 @@ import com.obs.bwoo.kuramqtt.cli.config.Download2Config;
 import com.obs.bwoo.kuramqtt.cli.config.NullConfig;
 import com.obs.bwoo.kuramqtt.cli.config.ServiceStartConfig;
 import com.obs.bwoo.kuramqtt.cli.config.ServiceStopConfig;
-import com.obs.bwoo.kuramqtt.server.commands.Install;
-import com.obs.bwoo.kuramqtt.server.commands.ServerExecutable;
-import com.obs.bwoo.kuramqtt.server.config.InstallConfig;
 
 /**
  * @author bwoo
@@ -112,57 +109,6 @@ public class KuraCommand {
 	
 	
 	
-	
-	/**
-	 * This is used in the REST API.
-	 * 
-	 * @param client
-	 * @param command
-	 * @param accountId
-	 * @param requestId
-	 * @param requesterClientId
-	 * @param targetClientId
-	 * @param extraConfig
-	 * @return
-	 */
-	public static ServerExecutable getExecutable(
-			KuraMqttClient client,
-			ApiType command, 
-			String accountId, 
-			String requestId,
-			String requesterClientId, 
-			String targetClientId,
-			Map<String, Object> extraConfig)
-	{
-		
-		if (ApiType.INSTALL == command)
-		{
-			PubSubConfig configs = 
-					new InstallConfig(accountId, requestId, requesterClientId, targetClientId, extraConfig);
-			
-			return new Install(client, configs);
-			
-		}
-		else if (ApiType.SERVICE_STOP == command)
-		{
-			PubSubConfig configs = 
-					new com.obs.bwoo.kuramqtt.server.config.ServiceStopConfig(
-							accountId, requestId, requesterClientId, targetClientId, extraConfig);
-			
-			return new com.obs.bwoo.kuramqtt.server.commands.Service(client, configs);
-		}	
-		else if (ApiType.SERVICE_START == command)
-		{
-			PubSubConfig configs = 
-					new com.obs.bwoo.kuramqtt.server.config.ServiceStartConfig(
-							accountId, requestId, requesterClientId, targetClientId, extraConfig);
-			
-			return new com.obs.bwoo.kuramqtt.server.commands.Service(client, configs);
-		}				
-		
-		
-		return null;
-	}
 	
 	
 
