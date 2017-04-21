@@ -1,0 +1,151 @@
+<html lang="en" ng-app="obs-iot-control-panel">
+	<head>
+	   <meta charset="utf-8">
+	   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	   <meta name="viewport" content="width=device-width, initial-scale=1">
+	   <title>OBS IoT Control Panel</title>
+	   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+	   <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet"/>
+	   <link href="css/styles.css" rel="stylesheet"/>
+	
+	   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	   <!--[if lt IE 9]>
+	         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+	         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	      <![endif]-->	
+	
+	</head>
+	
+	<body>
+		<div ng-controller="DeviceCtrl" class="container">
+			<h1>IoT Control Panel</h1>
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-3">
+					<div class="form-group">
+    					<label for="gateway">Gateway</label>
+    					<input type="text" class="form-control" id="gateway" ng-model="gateway">
+  					</div>
+				</div>
+				
+				<div class="col-xs-12 col-sm-3">
+					<div class="form-group">
+    					<label for="requester">Requester</label>
+    					<input type="text" class="form-control" id="requester" ng-model="requester">
+  					</div>				
+				</div>
+				
+				<div class="col-xs-12 col-sm-3">
+					<div class="form-group">
+    					<label for="requestId">Request Id</label>
+    					<input type="text" class="form-control" id="requestId" ng-model="requestId">
+  					</div>				
+				</div>
+				
+				<div class="col-xs-12 col-sm-3">
+					<div class="form-group">
+    					<div class="hidden-label hidden-xs"></div>
+    					<button ng-click="listServices()" class="btn btn-primary">List Services</button>
+  					</div>				
+				</div>
+			</div>
+			
+			<div class="row">
+			
+				<div class="col-xs-12 col-sm-6" 
+					 ng-repeat="service in listOfServices track by service.id">
+					 
+					<div class="panel panel-primary" >
+					  <div class="panel-heading">
+					    <h4 class="panel-title">{{service.name}}</h4>
+					  </div>
+					  <div class="panel-body">
+					  	<div class="row">
+						  	<div class="col-xs-8">
+							  	<div>VERSION: {{service.version}}</div>
+							    <div>BUNDLE ID: {{service.id}}</div>
+							    <div>STATE: {{service.state}}</div>
+						  	</div>
+						  	<div class="col-xs-4">
+						  		<div>
+						  			<button class="btn btn-danger" ng-show="isActive(service.state)"
+						  					ng-click="stopService(service.id)">
+						  					Stop
+						  			</button>
+						  			<button class="btn btn-primary" ng-show="!isActive(service.state)"
+						  					ng-click="startService(service.id)">
+						  					Start
+						  			</button>					  			
+						  		</div>
+						  		<br/>
+						  		<div>
+						  			<button 	class="btn btn-primary" 
+						  						data-target="#{{service.id}}"
+						  						data-toggle="collapse">Download...</button>
+								</div>
+								
+
+								
+						  	</div>
+					    </div>
+					    
+					    <div class="row">
+							<div class="col-xs-12 collapse" id="{{service.id}}" >
+								<div class="form-group">
+			    					<label for="url">Package URL</label>
+			    					<input type="text" class="form-control" id="pkgUrl" 
+			    							ng-model="downloadPkgs[service.id].pkgUrl">
+			  					</div>
+								<div class="form-group">
+			    					<label for="url">Package Name</label>
+			    					<input type="text" class="form-control" id="pkgName" 
+			    							ng-model="downloadPkgs[service.id].pkgName">
+			  					</div>	
+								<div class="form-group">
+			    					<label for="url">Package Version</label>
+			    					<input type="text" class="form-control" id="pkgVersion" 
+			    							ng-model="downloadPkgs[service.id].pkgVersion">
+			  					</div>	
+			  					<div>
+						  			<button class="btn btn-primary" 
+						  				ng-click="updatePackage(service.id)">Update</button>			  					
+			  					</div>
+			  												
+							
+								<!-- 
+								<div  class="collapse">
+    								<label for="gateway">Gateway</label>
+    								<input type="text" class="form-control" id="gateway" ng-model="gateway">
+								</div>
+								 -->							
+							</div>    
+					    </div>
+					    
+					  </div>
+					</div>			
+				</div>
+				
+			</div>
+
+		</div>
+		
+
+
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.min.js"></script>
+	   <!-- 
+	   <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+	    -->
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular-resource.min.js"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	   
+	   
+	   <script src="js/app.js"></script>
+	   <script src="js/controllers.js"></script>
+	   <script src="js/services.js"></script>
+	
+	</body>
+
+
+</html>
